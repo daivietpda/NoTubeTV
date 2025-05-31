@@ -6,7 +6,7 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-const val SCRIPTS_URL = "https://raw.githubusercontent.com/daivietpda/NoTubeTV/refs/heads/main/assets/userscripts.js"
+const val SCRIPTS_URL = "https://raw.githubusercontent.com/daivietpda/NoTubeTV/refs/heads/NotubeTV-UI1080/assets/userscripts.js"
 suspend fun fetchScripts(): String {
     val httpClient = HttpClient(CIO)
     while (true) {
