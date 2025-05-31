@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        window.setLayout(3840, 2160)
+        window.setLayout(1920, 1080)
         setContent {
             NoTubeTVTheme {
                Box(modifier = Modifier.fillMaxSize()) { YoutubeWV() }
