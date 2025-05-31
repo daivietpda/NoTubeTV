@@ -521,10 +521,9 @@
         ?.sectionListRenderer?.contents &&
       configRead("enableAdBlock")
     ) {
-      r.contents.tvBrowseRenderer.content.tvSurfaceContentRenderer.content.sectionListRenderer.contents =
-        r.contents.tvBrowseRenderer.content.tvSurfaceContentRenderer.content.sectionListRenderer.contents.filter(
-          (elm) => !elm.adSlotRenderer
-        );
+      const s = r.contents.tvBrowseRenderer.content.tvSurfaceContentRenderer.content.sectionListRenderer.contents[0];
+      s.shelfRenderer.content.horizontalListRenderer.items =
+      s.shelfRenderer.content.horizontalListRenderer.items.filter(i => !i?.adSlotRenderer)
     }
 
     if (
@@ -915,7 +914,10 @@
   window.addEventListener(
     "hashchange",
     () => {
-      if (!configRead("enableSponsorBlock")) return;
+      if (!configRead("enableSponsorBlock")) {
+        if (window.sponsorblock) window.sponsorblock.destroy();
+        return;
+      }
       const match = location.hash.match(/[?&]v=([^&]+)/);
       const videoID = match ? match[1] : null;
       if (!videoID) return;
@@ -924,9 +926,7 @@
 
       if (needsReload) {
         if (window.sponsorblock) {
-          try {
-            window.sponsorblock.destroy();
-          } catch (err) {}
+          window.sponsorblock.destroy();
           window.sponsorblock = null;
         }
 
